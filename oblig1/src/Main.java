@@ -7,6 +7,9 @@ class Main {
      * Oppretter et Regneklynge-objekt med racks og setter inn noder.
      *
      * Hvis filnavn spesifiseres lages Re
+     *
+     * @param args
+     *
      */
     public static void main (String[] args) {
         // Hvis ett kommandolinje-argument, gjør del 2 av oblig.
