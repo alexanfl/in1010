@@ -5,7 +5,7 @@ class Main {
         // Opprett nytt Regneklynge-objekt ved navn abel.
         Regneklynge abel = new Regneklynge(args[0]);
 
-        System.out.println("\nNoder med minst 32 GB: " 
+        System.out.println("Noder med minst 32 GB: " 
                             + abel.noderMedNokMinne(32));
         System.out.println("Noder med minst 64 GB: " 
                             + abel.noderMedNokMinne(64));
@@ -18,6 +18,9 @@ class Main {
         }
         // Hvis det ikke finnes kommandolinje-arg, gjør del 1 av oblig.
         else if (args.length == 0) {
+            System.out.println("Henter ikke fra fil."
+                               + " Bruk eventuelt >java Main $fil\n");
+
             // Opprett nytt Regneklynge-objekt ved navn abel.
             Regneklynge abel = new Regneklynge(12);
 
@@ -31,7 +34,7 @@ class Main {
                 abel.settInnNode(new Node(1024, 2));
             }
 
-            System.out.println("\nNoder med minst 32 GB: " 
+            System.out.println("Noder med minst 32 GB: " 
                                 + abel.noderMedNokMinne(32));
             System.out.println("Noder med minst 64 GB: " 
                                 + abel.noderMedNokMinne(64));
@@ -44,7 +47,7 @@ class Main {
 
         }
         else {
-            System.out.println("Maks ett filnavn som argument.");
+            System.out.println("Maks ett filnavn. Bruk: >java Main $fil\n");
         }
     }
 }
