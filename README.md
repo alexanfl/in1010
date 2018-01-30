@@ -1,1 +1,1 @@
-# IN1010: Objektorientert programmering
+# IN1010: Objektorientert programmering – Vår 2018
