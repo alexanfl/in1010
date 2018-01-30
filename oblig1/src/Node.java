@@ -37,7 +37,7 @@ public class Node {
 
 
     /**
-     * Sjekker om noden har minne større eller lik enn påkrevd minne.
+     * Sjekker om noden har minne større eller lik påkrevd minne.
      *
      * @param paakrevdMinne Kravet til minnestørrelse.
      * @return              true hvis minnet er stort nok, ellers false.
