@@ -1,7 +1,12 @@
+/**
+ * @author  Alexander Fleischer alexander.fleischer@fys.uio.no
+ */
+
 class Main {
     public static void main (String[] args) {
         // Hvis ett kommandolinje-argument, gjør del 2 av oblig.
         if (args.length == 1) {
+
         // Opprett nytt Regneklynge-objekt ved navn abel.
         Regneklynge abel = new Regneklynge(args[0]);
 
