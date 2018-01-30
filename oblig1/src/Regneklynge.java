@@ -8,14 +8,9 @@ import java.io.FileNotFoundException;
  * @author Alexander Fleischer alexander.fleischer@fys.uio.no
  */
 public class Regneklynge {
-    /**
-     * Det maksimale antallet noderi hvert Rack-objekt.
-     */
+    // Det maksimale antallet noderi hvert Rack-objekt.
     private int noderPerRack;
-
-    /** 
-     * Velger å bruke en ArrayList fordi antall Racks ikke er kjent.
-     */
+    // Velger å bruke en ArrayList fordi antall Racks ikke er kjent.
     private ArrayList<Rack> racks = new ArrayList<Rack>();
 
 
@@ -48,17 +43,11 @@ public class Regneklynge {
      * @exception FileNotFoundException Hvis filen ikke finnes.
     */
     public void settInnFraFil(String filnavn) {
-        /**
-         * Midlertidig variabel for antallet noder (per linje) i input-fila.
-         */
+        // Midlertidig variabel for antallet noder (per linje) i input-fila.
         int antNoderPerLinje;
-        /**
-         * Midlertidig variabel for prosessorminnet (per linje) i input-fila.
-         */
+        // Midlertidig variabel for prosessorminnet (per linje) i input-fila.
         int antMinnePerLinje;
-        /**
-         * Midlertidig variabel for antallet prosessorer (per linje) i input-fila.
-         */
+        // Midlertidig variabel for antallet prosessorer (per linje) i input-fila.
         int antProsPerLinje;
 
         // Se om fil eksisterer. Exception hvis ikke.
@@ -120,9 +109,7 @@ public class Regneklynge {
      * @return antallet prosessorer i regneklyngen.
     */
     public int antProsessorer() {
-        /**
-         * Antallet prosessorer i regneklyngen.
-         */
+        // Antallet prosessorer i regneklyngen.
         int antPros = 0;
 
         // Sjekker antall prosessorer i rack.
@@ -143,9 +130,7 @@ public class Regneklynge {
      * @return              Antallet noder med nok minne.
      */
     public int noderMedNokMinne(int paakrevdMinne) {
-        /**
-         * Antallet noder med nok minne i regneklyngen.
-         */
+        // Antallet noder med nok minne i regneklyngen.
         int antNoderMedNokMinne = 0;
 
         // Sjekker antall noeder med nok minne i hvert rack.

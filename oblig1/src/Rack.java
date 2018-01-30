@@ -3,23 +3,15 @@
  */
 
 public class Rack {
-    /**
-     * Antallet noder i racket for øyeblikket.
-     */
+    // Antallet noder i racket for øyeblikket.
     private int antNoder = 0;
-    /**
-     * Det maksimale antallet noder et Rack-objekt kan holde.
-     */
+    // Det maksimale antallet noder et Rack-objekt kan holde.
     private int maksAntNoder;
 
-    /**
-     * Holder styr på om racket er fullt.
-     */
+    // Holder styr på om racket er fullt.
     private boolean full = false;
 
-    /** 
-     * Velger å bruke en vanlig array fordi antall noder er kjent.
-     */
+    // Velger å bruke en vanlig array fordi antall noder er kjent.
     private Node[] noder;
 
 
@@ -81,9 +73,7 @@ public class Rack {
     */
     public int noderMedNokMinne(int paakrevdMinne) {
 
-        /**
-         * Variabel som økes med én for hver node med nok minne.
-         */
+        // Variabel som økes med én for hver node med nok minne.
         int antNoderMedNokMinne = 0;
         
         // Itererer over nodene i racket og sjekker hvilke som har nok minne.

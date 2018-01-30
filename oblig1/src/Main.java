@@ -12,9 +12,7 @@ class Main {
         // Hvis ett kommandolinje-argument, gjør del 2 av oblig.
         if (args.length == 1) {
 
-        /**
-         * Regneklynge-objekt ved navn abel.
-         */
+        // Regneklynge-objekt ved navn abel.
         Regneklynge abel = new Regneklynge(args[0]);
 
         System.out.println("Noder med minst 32 GB: " 
@@ -33,9 +31,7 @@ class Main {
             System.out.println("Henter ikke fra fil."
                                + " Bruk eventuelt >java Main $fil\n");
 
-            /**
-             * Oppretter ny Regneklynge abel med maksimalt 12 noder per rack.
-             */
+            // Oppretter ny Regneklynge abel med maksimalt 12 noder per rack.
             Regneklynge abel = new Regneklynge(12);
 
             // Sett inn 650 noder med 64 GB minne og 1 prosessor.
