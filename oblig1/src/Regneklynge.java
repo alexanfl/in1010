@@ -157,6 +157,7 @@ public class Regneklynge {
         return antNoderMedNokMinne;
     }
 
+
     /**
      * Henter antall racks regneklynge.
      *

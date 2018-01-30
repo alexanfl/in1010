@@ -3,11 +3,18 @@
  */
 
 class Main {
+    /**
+     * Oppretter et Regneklynge-objekt med racks og setter inn noder.
+     *
+     * Hvis filnavn spesifiseres lages Re
+     */
     public static void main (String[] args) {
         // Hvis ett kommandolinje-argument, gjør del 2 av oblig.
         if (args.length == 1) {
 
-        // Opprett nytt Regneklynge-objekt ved navn abel.
+        /**
+         * Regneklynge-objekt ved navn abel.
+         */
         Regneklynge abel = new Regneklynge(args[0]);
 
         System.out.println("Noder med minst 32 GB: " 
@@ -26,7 +33,9 @@ class Main {
             System.out.println("Henter ikke fra fil."
                                + " Bruk eventuelt >java Main $fil\n");
 
-            // Opprett nytt Regneklynge-objekt ved navn abel.
+            /**
+             * Oppretter ny Regneklynge abel med maksimalt 12 noder per rack.
+             */
             Regneklynge abel = new Regneklynge(12);
 
             // Sett inn 650 noder med 64 GB minne og 1 prosessor.

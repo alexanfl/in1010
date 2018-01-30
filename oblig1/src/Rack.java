@@ -3,9 +3,18 @@
  */
 
 public class Rack {
+    /**
+     * Antallet noder i racket for øyeblikket.
+     */
     private int antNoder = 0;
+    /**
+     * Det maksimale antallet noder et Rack-objekt kan holde.
+     */
     private int maksAntNoder;
 
+    /**
+     * Holder styr på om racket er fullt.
+     */
     private boolean full = false;
 
     /** 
@@ -13,7 +22,10 @@ public class Rack {
      */
     private Node[] noder;
 
+
     /**
+     * Setter maksAntNoder fra argument og oppretter en liste av Node-objekter.
+     *
      * @param maksAntNoder
      */
     public Rack(int maksAntNoder) {
@@ -21,13 +33,14 @@ public class Rack {
         this.noder = new Node[maksAntNoder];
     }
 
+
     /**
     * @return antallet noder i racket.
     */
     public int getAntNoder() {
-
         return antNoder;
     }
+
 
     /**
      * Setter inn en ny node i racket, øker antall noder i racks
@@ -41,10 +54,11 @@ public class Rack {
         oppdaterFull();
     }
 
+
     /**
      * Henter ut antall prosessorer ved å iterere over alle noder i racket.
      *
-     * @return antallet prosessorer i racket.
+     * @return Antallet prosessorer i racket.
      */
     public int antProsessorer() {
 
@@ -87,7 +101,6 @@ public class Rack {
     * Sjekker om racket er fullt og oppdaterer full.
     */
     public void oppdaterFull() {
-
         if (this.antNoder >= this.maksAntNoder) {
             this.full = true;
         }
@@ -101,4 +114,3 @@ public class Rack {
         return this.full;
     }
 }
-
