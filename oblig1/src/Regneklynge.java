@@ -4,13 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 
-/**
- * @author Alexander Fleischer alexander.fleischer@fys.uio.no
- */
 public class Regneklynge {
-    // Det maksimale antallet noderi hvert Rack-objekt.
-    private int noderPerRack;
-    // Velger å bruke en ArrayList fordi antall Racks ikke er kjent.
+    private int maksNoderPerRack;
     private ArrayList<Rack> racks = new ArrayList<Rack>();
 
 
@@ -19,8 +14,8 @@ public class Regneklynge {
      * Oppretter en regneklynge med et antall noder per rack.
      * Kan deretter sette inn noder med settInnNode-metoden.
      */
-    public Regneklynge(int noderPerRack) {
-        this.noderPerRack = noderPerRack;
+    public Regneklynge(int maksNoderPerRack) {
+        this.maksNoderPerRack = maksNoderPerRack;
     }
 
 
@@ -43,76 +38,53 @@ public class Regneklynge {
      * @exception FileNotFoundException Hvis filen ikke finnes.
     */
     public void settInnFraFil(String filnavn) {
-        // Midlertidig variabel for antallet noder (per linje) i input-fila.
-        int antNoderPerLinje;
-        // Midlertidig variabel for prosessorminnet (per linje) i input-fila.
-        int antMinnePerLinje;
-        // Midlertidig variabel for antallet prosessorer (per linje) i input-fila.
-        int antProsPerLinje;
+        int antNoderDenneLinja;
+        int antMinneDenneLinja;
+        int antProsDenneLinja;
 
         // Se om fil eksisterer. Exception hvis ikke.
         try (Scanner scanner = new Scanner(new File(filnavn))) {
             // Sett noderPerRack lik første int i fila.
-            this.noderPerRack = scanner.nextInt();
+            this.maksNoderPerRack = scanner.nextInt();
 
             // Hent ut antall noder, minne og prosessorer fra en linje i fila.
             while(scanner.hasNext()) {
-                antNoderPerLinje = scanner.nextInt();
-                antMinnePerLinje = scanner.nextInt();
-                antProsPerLinje  = scanner.nextInt();
+                antNoderDenneLinja = scanner.nextInt();
+                antMinneDenneLinja = scanner.nextInt();
+                antProsDenneLinja  = scanner.nextInt();
 
                 // Sett inn noder i rack.
-                for (int i = 0; i < antNoderPerLinje; i++) {
-                    this.settInnNode(new Node(antMinnePerLinje, antProsPerLinje));
+                for (int i = 0; i < antNoderDenneLinja; i++) {
+                    this.settInnNode(new Node(antMinneDenneLinja, antProsDenneLinja));
                 }
             }
         } catch (FileNotFoundException fnfe) {
-            System.out.println("Fil " + "\'" + filnavn + "\'" 
-                                + " finnes ikke.");
+            System.out.println("Fila " + filnavn + " finnes ikke.");
         }
     }
 
 
-    /**
-     * Oppretter et nytt Rack-objekt og legger det i ArrayList-en racks.
-     * Oppdaterer totalt antall racks.
-    */
     public void opprettRack() {
-        this.racks.add(new Rack(this.noderPerRack));
+        this.racks.add(new Rack(this.maksNoderPerRack));
     }
 
 
-    /**
-     * Setter inn nyNode i et rack. 
-     *
-     * Hvis det ikke finnes et rack eller om alle rackene er fulle, opprettes 
-     * et nytt. 
-    */
     public void settInnNode(Node nyNode) {
-        // Sjekker om det finnes racks og om det nyeste racket er fullt.
+
         if (this.racks.size() == 0) {
             opprettRack();
         }
-        else if (this.racks.get(this.racks.size() - 1).erFull()) {
+        else if (this.racks.get(this.racks.size() - 1).erFullt()) {
             opprettRack();
         }
 
-        // Setter inn nyNode i racket.
         this.racks.get(this.racks.size() - 1).settInn(nyNode);
     }
 
 
-    /**
-     * Henter ut antall prosessorer ved å iterere over alle racks
-     * i ArrayList-en og kalle Rack-objektets antProsessorer-metode.
-     *
-     * @return antallet prosessorer i regneklyngen.
-    */
     public int antProsessorer() {
-        // Antallet prosessorer i regneklyngen.
         int antPros = 0;
 
-        // Sjekker antall prosessorer i rack.
         for (int i = 0; i < this.racks.size(); i++) {
             antPros += this.racks.get(i).antProsessorer();   
         }
@@ -143,11 +115,6 @@ public class Regneklynge {
     }
 
 
-    /**
-     * Henter antall racks regneklynge.
-     *
-     * @return Størrelsen på ArrayList-en racks.
-     */
     public int antRacks() {
         return this.racks.size();
     }
