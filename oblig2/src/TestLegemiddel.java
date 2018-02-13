@@ -1,40 +1,53 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-class TestLegemiddel {
+class TestLegemiddel 
+{
     public static void main (String [] args)
     {
-        // Tester for klasse LegemiddelA
-        LegemiddelA testerA = new LegemiddelA("Testlegemiddel A", 300., 6., 9);
-        testNavn(testerA.hentNavn(), "Testlegemiddel A");
-        testPris(testerA.hentPris(), 300., 0.0001);
-        testVirkestoff(testerA.hentVirkestoff(), 6., 0.0001);
-        testStyrke(testerA.hentNarkotiskStyrke(), 9);
+        String navn;
+        double pris;
+        double nyPris;
+        double virkestoff;
+        int styrke;
 
-        testerA.settNyPris(350.);
-        testPris(testerA.hentPris(), 350., 0.0001);
+        // Tester for klasse LegemiddelA
+        navn = "Testlegemiddel A";
+        pris = 300.;
+        nyPris = 350.;
+        virkestoff = 6.;
+        styrke = 9;
+
+        LegemiddelA testerA = new LegemiddelA("Testlegemiddel A", 
+                                              pris, virkestoff, styrke);
+        kjorFellesTester(testerA,  navn, pris, virkestoff, nyPris);
+
+        testStyrke(testerA.hentNarkotiskStyrke(), styrke);
 
 
         // Tester for klasse LegemiddelB
-        LegemiddelB testerB = new LegemiddelB("Testlegemiddel B", 500., 5., 1);
-        testNavn(testerB.hentNavn(), "Testlegemiddel B");
-        testPris(testerB.hentPris(), 500., 0.0001);
-        testVirkestoff(testerB.hentVirkestoff(), 5., 0.0001);
-        testStyrke(testerB.hentVanedannendeStyrke(), 1);
+        navn = "Testlegemiddel B";
+        pris = 500.;
+        nyPris = 490.;
+        virkestoff = 5.;
+        styrke = 1;
 
-        testerB.settNyPris(550.);
-        testPris(testerB.hentPris(), 550., 0.0001);
+        LegemiddelB testerB = new LegemiddelB("Testlegemiddel B", 
+                                              pris, virkestoff, styrke);
+        kjorFellesTester(testerB,  navn, pris, virkestoff, nyPris);
+
+        testStyrke(testerB.hentVanedannendeStyrke(), styrke);
 
 
         // Tester for klasse LegemiddelC
-        LegemiddelC testerC = new LegemiddelC("Testlegemiddel C", 750., 100.);
-        testNavn(testerC.hentNavn(), "Testlegemiddel C");
-        testPris(testerC.hentPris(), 750., 0.0001);
-        testVirkestoff(testerC.hentVirkestoff(), 100., 0.0001);
+        navn = "Testlegemiddel C";
+        pris = 750.;
+        nyPris = 999.;
+        virkestoff = 100.;
 
-        testerC.settNyPris(840.);
-        testPris(testerC.hentPris(), 840., 0.0001);
-
+        LegemiddelC testerC = new LegemiddelC("Testlegemiddel C", 
+                                              pris, virkestoff);
+        kjorFellesTester(testerC,  navn, pris, virkestoff, nyPris);
     }
 
 
@@ -76,4 +89,16 @@ class TestLegemiddel {
         System.out.println("\t…Suksess!\n");
     }
 
+
+    static void kjorFellesTester(Legemiddel legemiddel, String navn, 
+                                 double pris, double virkestoff, double nyPris)
+    {
+        testNavn(legemiddel.hentNavn(),  navn);
+        testPris(legemiddel.hentPris(), pris, 0.0001);
+        testVirkestoff(legemiddel.hentVirkestoff(), virkestoff, 0.0001);
+
+        legemiddel.settNyPris(nyPris);
+        testPris(legemiddel.hentPris(), nyPris, 0.0001);
+
+    }
 }
