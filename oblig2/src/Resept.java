@@ -1,3 +1,80 @@
-public class Resept {
+public abstract class Resept {
     private Legemiddel legemiddel;
+    private Lege utskrivendeLege;
+    private int id;
+    private int pasientId;
+    private int reit;
+
+    static int idTeller = 0;
+
+    
+    public Resept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId, 
+                  int reit)
+    {
+        this.legemiddel = legemiddel;
+
+        this.utskrivendeLege = utskrivendeLege;
+        this.pasientId = pasientId;
+        this.reit = reit;
+
+        this.id = idTeller;
+        oppdaterIdTeller();
+    }
+
+
+    abstract public String farge();
+    abstract public double prisAaBetale();
+
+
+    public int hentId()
+    {
+        return this.id;
+    }
+
+
+    public int hentReit()
+    {
+        return this.reit;
+    }
+
+    public int hentPasientId()
+    {
+        return this.pasientId;
+    }
+
+
+    public Lege hentLege()
+    {
+        return this.utskrivendeLege;
+    }
+
+
+    public Legemiddel hentLegemiddel()
+    {
+        return this.legemiddel;
+    }
+
+
+    public void oppdaterReit(int nyVerdi)
+    {
+        this.reit = nyVerdi;
+    }
+
+
+    public boolean bruk()
+    {
+        if (hentReit() > 0) {
+            oppdaterReit(this.reit - 1);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    void oppdaterIdTeller()
+    {
+        idTeller++;
+    }
 }

@@ -52,40 +52,40 @@ class TestLegemiddel
 
 
     @Test
-    static void testNavn(String testVerdi, String resultat)
+    static void testNavn(String testVerdi, String forventet)
     {
-        System.out.println("Sjekker om legemiddel heter '" + resultat + "'");
-        assertEquals(testVerdi, resultat);
+        System.out.println("Sjekker om legemiddel heter '" + forventet + "'");
+        assertEquals(forventet, testVerdi);
         System.out.println("\t…Suksess!\n");
     }
 
 
     @Test
-    static void testPris(double testVerdi, double resultat, double feilmargin)
+    static void testPris(double testVerdi, double forventet, double feilmargin)
     {
-        System.out.println("Sjekker om legemiddel har pris=" + resultat);
-        assertEquals(testVerdi, resultat, feilmargin);
+        System.out.println("Sjekker om legemiddel har pris=" + forventet);
+        assertEquals(forventet, testVerdi, feilmargin);
         System.out.println("\t…Suksess!\n");
     }
 
 
     @Test
-    static void testVirkestoff(double testVerdi, double resultat, 
+    static void testVirkestoff(double testVerdi, double forventet, 
                                double feilmargin)
     {
         System.out.println("Sjekker om legemiddel har mengde virkestoff=" 
-                           + resultat);
-        assertEquals(testVerdi, resultat, feilmargin);
+                           + forventet);
+        assertEquals(forventet, testVerdi, feilmargin);
         System.out.println("\t…Suksess!\n");
     }
 
 
 
     @Test
-    static void testStyrke(int testVerdi, int resultat)
+    static void testStyrke(int testVerdi, int forventet)
     {
-        System.out.println("Sjekker om legemiddel har styrke=" + resultat);
-        assertEquals(testVerdi, resultat);
+        System.out.println("Sjekker om legemiddel har styrke=" + forventet);
+        assertEquals(forventet, testVerdi);
         System.out.println("\t…Suksess!\n");
     }
 
@@ -93,12 +93,14 @@ class TestLegemiddel
     static void kjorFellesTester(Legemiddel legemiddel, String navn, 
                                  double pris, double virkestoff, double nyPris)
     {
+        double feilmargin = 0.0001;
+
         testNavn(legemiddel.hentNavn(),  navn);
-        testPris(legemiddel.hentPris(), pris, 0.0001);
-        testVirkestoff(legemiddel.hentVirkestoff(), virkestoff, 0.0001);
+        testPris(legemiddel.hentPris(), pris, feilmargin);
+        testVirkestoff(legemiddel.hentVirkestoff(), virkestoff, feilmargin);
 
         legemiddel.settNyPris(nyPris);
-        testPris(legemiddel.hentPris(), nyPris, 0.0001);
+        testPris(legemiddel.hentPris(), nyPris, feilmargin);
 
     }
 }
