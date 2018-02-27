@@ -7,56 +7,48 @@ class Integrasjonstest
         int pasientId3 = 44;
 
         Fastlege fastlege           = new Fastlege("Ola Fastlege", 1); 
+        Lege lege                   = new Lege("Kari Sykehuslege"); 
 
         LegemiddelA smertestillende = new LegemiddelA("Morfin", 1000., 10., 5);
         LegemiddelB angstdempende   = new LegemiddelB("Sobril", 500., 15., 7);
         Legemiddel ppiller          = new LegemiddelC("Microgynon", 150., 150.);
 
         BlaaResept blaa = new BlaaResept(angstdempende, fastlege, pasientId1, 5);
-        Militaerresept militaer = new Militaerresept(smertestillende, fastlege, 
+        Militaerresept militaer = new Militaerresept(smertestillende, lege, 
                                                      pasientId2, 10);
-        PResept pResept = new PResept(ppiller, fastlege, pasientId1, 5);
+        PResept pResept = new PResept(ppiller, fastlege, pasientId3, 5);
 
+        testResept(blaa);
+        testResept(militaer);
+        testResept(pResept);
 
-        testLegemiddel(blaa.hentLegemiddel());
-        testLegemiddel(militaer.hentLegemiddel());
-        testLegemiddel(pResept.hentLegemiddel());
-
-        testLegemiddel(smertestillende);
+        
 
     }    
 
-    /*
-     * Samme metodenavn/metodeoverlasting for å teste subklasser.
-     */
+
     static void testLegemiddel(Legemiddel legemiddel)
     {
-        skrivUtLegemiddelInformasjon(legemiddel);
-        System.out.println("\n");
+        legemiddel.skrivUtLegemiddelinformasjon();
     }
 
 
-    static void testLegemiddel(LegemiddelA legemiddel)
+    static void testLege(Lege lege)
     {
-        skrivUtLegemiddelInformasjon(legemiddel);
-        System.out.println("\tNarkotisk styrke: " + legemiddel.hentNarkotiskStyrke());
-        System.out.println("\n");
+        lege.skrivUtLegeinformasjon();
     }
 
 
-    static void testLegemiddel(LegemiddelB legemiddel)
+    static void testResept(Resept resept)
     {
-        skrivUtLegemiddelInformasjon(legemiddel);
-        System.out.println("\tVanedannende styrke: " + legemiddel.hentVanedannendeStyrke());
-        System.out.println("\n");
+        System.out.println();
+        System.out.println("--------- Resepttest ---------");
+        System.out.println();
+        resept.skrivUtReseptinformasjon();
+        testLege(resept.hentLege());
+        testLegemiddel(resept.hentLegemiddel());
+        System.out.println("------------------------------");
+        System.out.println();
     }
 
-
-    static void skrivUtLegemiddelInformasjon(Legemiddel legemiddel)
-    {
-        System.out.println("Legemiddelinformasjon\n---------------------");
-        System.out.println("\tNavn: " + legemiddel.hentNavn());
-        System.out.println("\tID: " + legemiddel.hentId());
-        System.out.println("\tMengdevirkestoff: " + legemiddel.hentVirkestoff());
-    }
 }

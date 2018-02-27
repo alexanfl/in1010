@@ -53,4 +53,14 @@ public class Legemiddel
     {
         idTeller++;
     }
+
+
+    public void skrivUtLegemiddelinformasjon()
+    {
+        System.out.println("Legemiddelinformasjon\n---------------------");
+        System.out.println("\tNavn: " + hentNavn());
+        System.out.println("\tID: " + hentId());
+        System.out.println("\tMengdevirkestoff: " + hentVirkestoff());
+        System.out.println();
+    }
 }

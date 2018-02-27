@@ -13,4 +13,12 @@ public class Lege
     {
         return this.navn;
     }
+
+
+    public void skrivUtLegeinformasjon()
+    {
+        System.out.println("Legeinformasjon\n---------------------");
+        System.out.println("\tLegens navn: " + hentNavn());
+        System.out.println();
+    }
 }

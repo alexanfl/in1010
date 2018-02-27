@@ -77,4 +77,15 @@ public abstract class Resept {
     {
         idTeller++;
     }
+
+
+    void skrivUtReseptinformasjon()
+    {
+        System.out.println("Reseptinformasjon\n---------------------");
+        System.out.println("\tID: " + hentId());
+        System.out.println("\tFarge: " + farge());
+        System.out.println("\tReit: " + hentReit());
+        System.out.println("\tPasientID: " + hentPasientId());
+        System.out.println();
+    }
 }
