@@ -1,6 +1,3 @@
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-
 class TestResepter 
 {
     public static void main (String [] args)
@@ -13,7 +10,7 @@ class TestResepter
         int testPasientId = 42;
         int testStyrke = 1;
 
-        Lege testLege = new Lege();
+        Lege testLege = new Lege("Lege Legesen");
         Legemiddel testLegemiddel = new LegemiddelA("testmiddel A", 
                                                     testPris, testVirkestoff, 
                                                     testStyrke);
@@ -84,7 +81,6 @@ class TestResepter
     }    
 
 
-    @Test
     static void testReit(int testVerdi, int forventet)
     {
         System.out.println("Tester om resept har reit=" + forventet);
@@ -93,7 +89,6 @@ class TestResepter
     }
 
 
-    @Test
     static void testPris(double testVerdi, double forventet, 
                          double feilmargin)
     {
@@ -103,7 +98,6 @@ class TestResepter
     }
 
 
-    @Test
     static void testFarge(String testVerdi, String forventet)
     {
         System.out.println("Tester om reseptfargen er " + forventet);
@@ -112,7 +106,6 @@ class TestResepter
     }
 
 
-    @Test
     static void testId(int testVerdi, int forventet)
     {
         System.out.println("Tester om resept har id=" + forventet);
@@ -121,7 +114,6 @@ class TestResepter
     }
 
 
-    @Test
     static void testPasientId(int testVerdi, int forventet)
     {
         System.out.println("Tester om pasientens id=" + forventet);
@@ -130,12 +122,57 @@ class TestResepter
     }
 
 
-    @Test
     static void testBruk(boolean testVerdi, boolean forventet)
     {
         System.out.println("Tester om resepten kan brukes, forventet=" + forventet);
         assertEquals(forventet, testVerdi);
         System.out.println("\t… Suksess!\n");
+    }
+
+
+    //Overlasting av assertEquals pga. forskjellige typer av verdier.
+    static boolean assertEquals(int forventet, int testVerdi)
+    {
+        if (forventet == testVerdi) {
+           return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    static boolean assertEquals(String forventet, String testVerdi)
+    {
+        if (testVerdi.equals(forventet))  {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    static boolean assertEquals(double forventet, double testVerdi, 
+                                double feilmargin)
+    {
+        if (forventet <= testVerdi + feilmargin 
+                && forventet >= testVerdi + feilmargin) {
+           return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    static boolean assertEquals(boolean forventet, boolean testVerdi)
+    {
+        if (forventet == testVerdi)  {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

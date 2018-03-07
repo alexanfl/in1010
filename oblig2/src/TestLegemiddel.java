@@ -1,6 +1,3 @@
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-
 class TestLegemiddel 
 {
     public static void main (String [] args)
@@ -51,7 +48,6 @@ class TestLegemiddel
     }
 
 
-    @Test
     static void testNavn(String testVerdi, String forventet)
     {
         System.out.println("Sjekker om legemiddel heter '" + forventet + "'");
@@ -60,7 +56,6 @@ class TestLegemiddel
     }
 
 
-    @Test
     static void testPris(double testVerdi, double forventet, double feilmargin)
     {
         System.out.println("Sjekker om legemiddel har pris=" + forventet);
@@ -69,7 +64,6 @@ class TestLegemiddel
     }
 
 
-    @Test
     static void testVirkestoff(double testVerdi, double forventet, 
                                double feilmargin)
     {
@@ -81,7 +75,6 @@ class TestLegemiddel
 
 
 
-    @Test
     static void testStyrke(int testVerdi, int forventet)
     {
         System.out.println("Sjekker om legemiddel har styrke=" + forventet);
@@ -102,5 +95,41 @@ class TestLegemiddel
         legemiddel.settNyPris(nyPris);
         testPris(legemiddel.hentPris(), nyPris, feilmargin);
 
+    }
+
+
+    //Overlasting av assertEquals pga. forskjellige typer av verdier.
+    static boolean assertEquals(int forventet, int testVerdi)
+    {
+        if (forventet == testVerdi) {
+           return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    static boolean assertEquals(String forventet, String testVerdi)
+    {
+        if (testVerdi.equals(forventet))  {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    static boolean assertEquals(double forventet, double testVerdi, 
+                                double feilmargin)
+    {
+        if (forventet <= testVerdi + feilmargin 
+                && forventet >= testVerdi + feilmargin) {
+           return true;
+        }
+        else {
+            return false;
+        }
     }
 }
