@@ -5,6 +5,8 @@ class Pasient {
 
     static int idTeller = 0;
 
+    Stabel<Resept> reseptliste;
+
 
     public Pasient(String navn, String fnr)
     {
@@ -19,5 +21,17 @@ class Pasient {
     void oppdaterIdTeller()
     {
         idTeller++;
+    }
+
+
+    Stabel<Resept> hentReseptliste()
+    {
+        return this.reseptliste;
+    }
+
+
+    void leggTilResept(Resept nyResept)
+    {
+        this.reseptliste.leggPaa(nyResept);
     }
 }
