@@ -1,9 +1,13 @@
 import java.util.Iterator;
 
 class LenkelisteIterator<T> implements Iterator<T> {
-    LenkelisteIterator()
-    {
+    private Node<T> forrigeNode;
+    private Node<T> node;
 
+
+    LenkelisteIterator(Node<T> startNode)
+    {
+        this.node = startNode;
     } 
 
 
@@ -14,11 +18,18 @@ class LenkelisteIterator<T> implements Iterator<T> {
 
     public T next()
     {
-        return ;
+        this.forrigeNode = this.node;
+        this.node = node.hentNeste();
+        return node.hentNodeData();
     }
 
     public boolean hasNext()
     {
-        return true;
+        if (node.hentNeste() == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

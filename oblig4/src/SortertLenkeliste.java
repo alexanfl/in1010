@@ -23,6 +23,14 @@ class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T>
         oekAntNoder();
     }
 
+
+    @Override
+    public void leggTil(int pos, T x)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+
     public void finnNyNodePlass(Node<T> node, Node<T> nyNode, T x)
     {
         for (int i = 0; i < stoerrelse(); i++) {
