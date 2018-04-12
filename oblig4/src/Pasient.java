@@ -34,4 +34,33 @@ class Pasient {
     {
         this.reseptliste.leggPaa(nyResept);
     }
+
+
+    public void skrivUtPasientinformasjon()
+    {
+        System.out.println("Pasientinformasjon\n---------------------");
+        System.out.println("\tNavn: " + this.navn);
+        System.out.println("\tID: " + this.id);
+        System.out.println("\tFødselsnummer: " + this.fnr);
+        System.out.println();
+    }
+
+
+    public String hentNavn()
+    {
+        return this.navn;
+    }
+
+
+    public int hentId()
+    {
+        return this.id;
+    }
+
+
+    public String hentFnr()
+    {
+        return this.fnr;
+    }
+
 }

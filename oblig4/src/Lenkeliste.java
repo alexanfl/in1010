@@ -163,7 +163,7 @@ public class Lenkeliste<T> implements Liste<T>
 
     public Iterator<T> iterator()
     {
-        LenkelisteIterator<T> iterator = new LenkelisteIterator<T>();
+        LenkelisteIterator<T> iterator = new LenkelisteIterator<T>(this.initNode);
 
         return iterator;
     }
