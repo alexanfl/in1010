@@ -172,6 +172,12 @@ class Legesystem {
 
         while(pasient == -1) {
             System.out.println("Hvilken pasient vil du se resepter for?");
+
+            for (Pasient p : pasientliste) {
+                System.out.printf("%d: %s (fnr %s)%n", 
+                                  i, p.hentNavn(), p.hentFnr());
+              i++;
+            }
             try {
                 pasient = input.nextInt();
                 input.nextLine();
@@ -184,18 +190,18 @@ class Legesystem {
             }
         }
 
-        for (Pasient p : pasientliste) {
-            System.out.printf("%d: %s (fnr %s)%n", 
-                              i, p.hentNavn(), p.hentFnr());
-          i++;
-        }
 
         System.out.printf("Pasient: %s (fnr %s)%n", 
                           pasientliste.hent(pasient).hentNavn(), 
                           pasientliste.hent(pasient).hentFnr());
 
-        while(pasient == -1) {
+        while(resept == -1) {
             System.out.println("Hvilken resept vil du bruke?");
+            for (Resept r : pasientliste.hent(pasient).hentReseptliste()){
+                System.out.printf("%d: %s (%d reit)%n", j, 
+                                r.hentLegemiddel().hentNavn(), r.hentReit());
+                j++;
+            }
             try {
                 resept = input.nextInt();
                 input.nextLine();
@@ -211,11 +217,6 @@ class Legesystem {
 
         }
 
-        for (Resept r : pasientliste.hent(pasient).hentReseptliste()){
-            System.out.printf("%d: %s (%d reit)%n", j, 
-                            r.hentLegemiddel().hentNavn(), r.hentReit());
-            j++;
-        }
 
         if (pasientliste.hent(pasient).hentReseptliste().hent(resept).bruk()){
             System.out.printf("Brukte resept på %s. Antall gjenværende reit: %d%n",
@@ -482,14 +483,25 @@ class Legesystem {
 
     public Pasient hentPasientId()
     {
-        int in;
+        int in = -1;
         while(true) {
-            in = input.nextInt();
+            while(in == -1) {
+                System.out.printf("Skriv inn pasientId:");
+                try {
+                    in = input.nextInt();
+                    input.nextLine();
+
+                } catch(InputMismatchException e) {
+                    System.out.println("Kun tall er gyldige input.");
+                    input.next();
+                }
+            }
             for (Pasient pasient: pasientliste) {
                 if (pasient.hentId() == in) {
                     return pasient;
                 }
             }
+            in = -1;
             System.out.println("Velg en gyldig pasient!\n");
         }
     }
@@ -540,14 +552,34 @@ class Legesystem {
             switch(valg)
             {
                 case 1: 
-                    System.out.println("Reit:");
-                    reit = input.nextInt();
+                    reit = -1;
+                    while(reit == -1) {
+                        System.out.println("Reit:");
+                        try {
+                            reit = input.nextInt();
+                            input.nextLine();
+
+                        } catch(InputMismatchException e) {
+                            System.out.println("Kun tall er gyldige input.");
+                            input.next();
+                        }
+                    }
                     reseptliste.leggTil(new HvitResept(tmpLegemiddel, 
                                         tmpLege, tmpPasient, reit));
                     break;
                 case 2: 
-                    System.out.println("Reit:");
-                    reit = input.nextInt();
+                    reit = -1;
+                    while(reit == -1) {
+                        System.out.println("Reit:");
+                        try {
+                            reit = input.nextInt();
+                            input.nextLine();
+
+                        } catch(InputMismatchException e) {
+                            System.out.println("Kun tall er gyldige input.");
+                            input.next();
+                        }
+                    }
                     reseptliste.leggTil(new BlaaResept(tmpLegemiddel, 
                                         tmpLege, tmpPasient, reit));
                     break;
@@ -556,8 +588,18 @@ class Legesystem {
                                         tmpLege, tmpPasient, reit));
                     break;
                 case 4: 
-                    System.out.println("Reit:");
-                    reit = input.nextInt();
+                    reit = -1;
+                    while(reit == -1) {
+                        System.out.println("Reit:");
+                        try {
+                            reit = input.nextInt();
+                            input.nextLine();
+
+                        } catch(InputMismatchException e) {
+                            System.out.println("Kun tall er gyldige input.");
+                            input.next();
+                        }
+                    }
                     reseptliste.leggTil(new Militaerresept(tmpLegemiddel, 
                                         tmpLege, tmpPasient, reit));
                     break;
