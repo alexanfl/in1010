@@ -21,6 +21,9 @@ public abstract class Resept {
 
         this.id = idTeller;
         oppdaterIdTeller();
+
+        this.p.leggTilResept(this);
+        this.utskrivendeLege.leggTilResept(this);
     }
 
 

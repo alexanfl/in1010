@@ -5,7 +5,7 @@ class Pasient {
 
     static int idTeller = 0;
 
-    Stabel<Resept> reseptliste;
+    Stabel<Resept> reseptliste = new Stabel<>();
 
 
     public Pasient(String navn, String fnr)

@@ -16,13 +16,13 @@ class Legesystem {
         this.reseptliste = new Lenkeliste<Resept>();
         this.legemiddelliste = new Lenkeliste<Legemiddel>();
 
-        legeliste.leggTil(new Lege("Dr. Arne"));
-        pasientliste.leggTil(new Pasient("Runar", "01010166644"));
-        legemiddelliste.leggTil(new LegemiddelC("Morfin", 400, 400));
-        reseptliste.leggTil(new HvitResept(legemiddelliste.hent(0),
+        this.legeliste.leggTil(new Lege("Dr. Arne"));
+        this.pasientliste.leggTil(new Pasient("Runar", "01010166644"));
+        this.legemiddelliste.leggTil(new LegemiddelC("Morfin", 400, 400));
+        this.reseptliste.leggTil(new HvitResept(legemiddelliste.hent(0),
                                            legeliste.hent(0), 
                                            pasientliste.hent(0), 
-                                           0));
+                                           5));
 
     }
 
@@ -124,17 +124,17 @@ class Legesystem {
         int valg = 0;
 
         while(true){
-           try {
-               valg = input.nextInt();
-               input.nextLine();
+            try {
+                valg = input.nextInt();
+                input.nextLine();
 
-               return valg;
+                return valg;
 
-           } catch(InputMismatchException e) {
-               System.out.println("Kun kommandoer tall er gyldige input.");
-               input.next();
-               continue;
-          }
+            } catch(InputMismatchException e) {
+                System.out.println("Kun kommandoer tall er gyldige input.");
+                input.next();
+                continue;
+            }
         }
     }
 
@@ -165,31 +165,57 @@ class Legesystem {
 
     public void brukResept()
     {
-        int pasient;
-        int resept;
+        int pasient = -1;
+        int resept = -1;
         int i = 0;
         int j = 0;
-        System.out.println("Hvilken pasient vil du se resepter for?");
+
+        while(pasient == -1) {
+            System.out.println("Hvilken pasient vil du se resepter for?");
+            try {
+                pasient = input.nextInt();
+                input.nextLine();
+            } catch(InputMismatchException e) {
+                System.out.println("Kun tall er gyldige input.");
+                input.next();
+            } catch(UgyldigListeIndeks l) {
+                System.out.println("Kun tall fra listen er gyldige.");
+                input.next();
+            }
+        }
 
         for (Pasient p : pasientliste) {
             System.out.printf("%d: %s (fnr %s)%n", 
                               i, p.hentNavn(), p.hentFnr());
           i++;
         }
-        pasient = input.nextInt();
 
         System.out.printf("Pasient: %s (fnr %s)%n", 
                           pasientliste.hent(pasient).hentNavn(), 
                           pasientliste.hent(pasient).hentFnr());
 
-        System.out.println("Hvilken resept vil du bruke?");
+        while(pasient == -1) {
+            System.out.println("Hvilken resept vil du bruke?");
+            try {
+                resept = input.nextInt();
+                input.nextLine();
+
+            } catch(InputMismatchException e) {
+                System.out.println("Kun tall er gyldige input.");
+                input.next();
+
+            } catch(UgyldigListeIndeks l) {
+                System.out.println("Kun tall fra listen er gyldige.");
+                input.next();
+            }
+
+        }
 
         for (Resept r : pasientliste.hent(pasient).hentReseptliste()){
             System.out.printf("%d: %s (%d reit)%n", j, 
                             r.hentLegemiddel().hentNavn(), r.hentReit());
             j++;
         }
-        resept = input.nextInt();
 
         if (pasientliste.hent(pasient).hentReseptliste().hent(resept).bruk()){
             System.out.printf("Brukte resept på %s. Antall gjenværende reit: %d%n",
@@ -306,7 +332,7 @@ class Legesystem {
         int valg = 0;
         boolean erFastlege = false;
         String tmpNavn;
-        int tmpAvtalenummer;
+        int tmpAvtalenummer = -1;
 
         System.out.println("Vil du legge til en fastlege(1) eller en vanlig lege(2)?");
         while(valg == 0) {
@@ -327,8 +353,18 @@ class Legesystem {
         System.out.printf("Skriv inn legens navn:");
         tmpNavn = hentString();
         if (erFastlege) {
-            System.out.printf("Skriv inn legens avtalenummer:");
-            tmpAvtalenummer = input.nextInt();
+            while(tmpAvtalenummer == -1) {
+                System.out.printf("Skriv inn legens avtalenummer:");
+                try {
+                    tmpAvtalenummer = input.nextInt();
+                    input.nextLine();
+
+                } catch(InputMismatchException e) {
+                    System.out.println("Kun tall er gyldige input.");
+                    input.next();
+                }
+            }
+
             legeliste.leggTil(new Fastlege(tmpNavn, tmpAvtalenummer));
             System.out.println("Fastlege lagt til i Legesystem.\n");
         }
@@ -345,19 +381,37 @@ class Legesystem {
         int valg = 0;
 
         String tmpNavn;
-        int tmpStyrke;
-        double tmpPris;
-        double tmpVirkestoff;
+        int tmpStyrke = -1;
+        double tmpPris = -1;
+        double tmpVirkestoff = -1;
         System.out.println("Meny for å legge til legemiddel.\n");
 
         System.out.println("Navn: ");
         tmpNavn = hentString();
 
-        System.out.println("Mengde virkestoff: ");
-        tmpVirkestoff = input.nextFloat();
+        while(tmpVirkestoff == -1) {
+            System.out.println("Mengde virkestoff: ");
+            try {
+                tmpVirkestoff = input.nextFloat();
+                input.nextLine();
 
-        System.out.println("Pris: ");
-        tmpPris = input.nextFloat();
+            } catch(InputMismatchException e) {
+                System.out.println("Kun tall er gyldige input.");
+                input.next();
+            }
+        }
+
+        while(tmpPris == -1) {
+            System.out.println("Pris: ");
+            try {
+                tmpPris = input.nextFloat();
+                input.nextLine();
+
+            } catch(InputMismatchException e) {
+                System.out.println("Kun tall er gyldige input.");
+                input.next();
+            }
+        }
 
         System.out.println("Hva slags legemiddel vil du legge til?");
         System.out.println("1: A");
@@ -369,14 +423,32 @@ class Legesystem {
             switch(valg)
             {
                 case 1: 
-                    System.out.println("Styrke: ");
-                    tmpStyrke = input.nextInt();
+                    while(tmpStyrke == -1) {
+                        System.out.println("Styrke: ");
+                        try {
+                            tmpStyrke = input.nextInt();
+                            input.nextLine();
+
+                        } catch(InputMismatchException e) {
+                            System.out.println("Kun tall er gyldige input.");
+                            input.next();
+                        }
+                    }
                     legemiddelliste.leggTil(new LegemiddelA(tmpNavn, tmpPris, 
                                             tmpVirkestoff, tmpStyrke));
                     break;
                 case 2: 
-                    System.out.println("Styrke: ");
-                    tmpStyrke = input.nextInt();
+                    while(tmpStyrke == -1) {
+                        System.out.println("Styrke: ");
+                        try {
+                            tmpStyrke = input.nextInt();
+                            input.nextLine();
+
+                        } catch(InputMismatchException e) {
+                            System.out.println("Kun tall er gyldige input.");
+                            input.next();
+                        }
+                    }
                     legemiddelliste.leggTil(new LegemiddelB(tmpNavn, tmpPris, 
                                             tmpVirkestoff, tmpStyrke));
                     break;

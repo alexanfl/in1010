@@ -7,6 +7,7 @@ public class Lege implements Comparable<Lege>
     public Lege(String navn)
     {
         this.navn = navn;
+        this.reseptliste = new Lenkeliste<Resept>();
     }   
 
 
